@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="CheckAndKillProcesses" this:CheckAndKillProcesses.in_KillProcesses="False" this:CheckAndKillProcesses.in_TargetProcesses="[new List(of String) From {{&quot;Excel&quot;}}]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Diagnostics;assembly=System" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="CheckAndKillProcesses" this:CheckAndKillProcesses.in_KillProcesses="True" this:CheckAndKillProcesses.in_TargetProcesses="[new List(of String) From {{&quot;Excel&quot;}}]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Diagnostics;assembly=System" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_RunningProcesses" Type="OutArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property Name="in_KillProcesses" Type="InArgument(x:Boolean)" />
@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1240,2015</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1240,2108</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Main_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="70">
@@ -88,7 +88,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CheckAndKillProcesses" sap:VirtualizedContainerService.HintSize="861,1850" sap2010:WorkflowViewState.IdRef="Sequence_7">
+  <Sequence DisplayName="CheckAndKillProcesses" sap:VirtualizedContainerService.HintSize="865,1943" sap2010:WorkflowViewState.IdRef="Sequence_7">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="CheckAndKillProcesses" Name="WorkflowName" />
       <Variable x:TypeArguments="x:Boolean" Default="True" Name="IsChildWorkflow" />
@@ -97,28 +97,16 @@
       <Variable x:TypeArguments="x:String" Default="[If(IsChildWorkflow AndAlso Not WorkflowInvoked, Path.GetDirectoryName(Path.GetDirectoryName(cwd.TrimEnd(&quot;\&quot;c).ToCharArray)) + &quot;\&quot;, cwd)]" Name="SolutionDir" />
       <Variable x:TypeArguments="x:String" Default="[SolutionDir + &quot;.workflows\&quot;]" Name="WorkflowsDir" />
       <Variable x:TypeArguments="x:String" Default="[If(IsChildWorkflow AndAlso WorkflowInvoked, WorkflowsDir + WorkflowName + &quot;\&quot;, cwd)]" Name="WorkflowDir" />
-      <Variable x:TypeArguments="scg:List(sd:Process)" Name="SOprocesses">
-        <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="scg:List(sd:Process)" ExpressionText="new List (of Process)" />
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="scg:List(sd:Process)" Name="RunningProcesses">
-        <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="scg:List(sd:Process)" ExpressionText="new List (of Process)" />
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="scg:List(sd:Process)" Name="NotKilledProcesses">
-        <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="scg:List(sd:Process)" ExpressionText="new List (of Process)" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="scg:List(sd:Process)" Default="[new List (of Process)]" Name="SOprocesses" />
+      <Variable x:TypeArguments="scg:List(sd:Process)" Default="[new List (of Process)]" Name="RunningProcesses" />
+      <Variable x:TypeArguments="scg:List(sd:Process)" Default="[new List (of Process)]" Name="NotKilledProcesses" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Inizialize" sap:VirtualizedContainerService.HintSize="819,283" sap2010:WorkflowViewState.IdRef="Sequence_8">
+    <Sequence DisplayName="Inizialize" sap:VirtualizedContainerService.HintSize="823,283" sap2010:WorkflowViewState.IdRef="Sequence_8">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -134,13 +122,13 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="819,1112" sap2010:WorkflowViewState.IdRef="Sequence_24">
+    <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="823,1205" sap2010:WorkflowViewState.IdRef="Sequence_24">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign DisplayName="GetProcessesForCurrentUser" sap:VirtualizedContainerService.HintSize="777,60" sap2010:WorkflowViewState.IdRef="Assign_16">
+      <Assign DisplayName="GetProcessesForCurrentUser" sap:VirtualizedContainerService.HintSize="781,60" sap2010:WorkflowViewState.IdRef="Assign_16">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(sd:Process)">[RunningProcesses]</OutArgument>
         </Assign.To>
@@ -148,8 +136,8 @@
           <InArgument x:TypeArguments="scg:List(sd:Process)">[Process.GetProcesses.AsEnumerable.Where(Function(f) f.Sessionid=System.Diagnostics.Process.GetCurrentProcess().SessionId).ToList]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="777,91" sap2010:WorkflowViewState.IdRef="LogMessage_11" Message="[&quot;Number of processes for current user : &quot;+RunningProcesses.Count.ToString]" />
-      <Assign DisplayName="SearchTargetProcesses" sap:VirtualizedContainerService.HintSize="777,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="781,91" sap2010:WorkflowViewState.IdRef="LogMessage_11" Message="[&quot;Number of processes for current user : &quot;+RunningProcesses.Count.ToString]" />
+      <Assign DisplayName="SearchTargetProcesses" sap:VirtualizedContainerService.HintSize="781,60" sap2010:WorkflowViewState.IdRef="Assign_13">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(sd:Process)">[SOprocesses]</OutArgument>
         </Assign.To>
@@ -157,8 +145,8 @@
           <InArgument x:TypeArguments="scg:List(sd:Process)">[RunningProcesses.AsEnumerable.Where(Function(u) in_TargetProcesses.Contains(u.ProcessName.ToUpper)).ToList]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="777,91" sap2010:WorkflowViewState.IdRef="LogMessage_9" Message="[SOprocesses.Count]" />
-      <If Condition="[in_KillProcesses]" DisplayName="IsKillProcess" sap:VirtualizedContainerService.HintSize="777,558" sap2010:WorkflowViewState.IdRef="If_1">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="781,91" sap2010:WorkflowViewState.IdRef="LogMessage_9" Message="[&quot;No of target processes running : &quot;+SOprocesses.Count.ToString]" />
+      <If Condition="[in_KillProcesses]" DisplayName="IsKillProcess" sap:VirtualizedContainerService.HintSize="781,651" sap2010:WorkflowViewState.IdRef="If_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -166,21 +154,21 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <If.Then>
-          <ui:ForEach x:TypeArguments="sd:Process" CurrentIndex="{x:Null}" DisplayName="KillEachProcess" sap:VirtualizedContainerService.HintSize="470,400" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[SOprocesses]">
+          <ui:ForEach x:TypeArguments="sd:Process" CurrentIndex="{x:Null}" DisplayName="KillEachProcess" sap:VirtualizedContainerService.HintSize="474,493" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[SOprocesses]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="sd:Process">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="sd:Process" Name="process" />
                 </ActivityAction.Argument>
-                <TryCatch DisplayName="TryKillProcess" sap:VirtualizedContainerService.HintSize="434,266" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                <TryCatch DisplayName="TryKillProcess" sap:VirtualizedContainerService.HintSize="438,359" sap2010:WorkflowViewState.IdRef="TryCatch_1">
                   <TryCatch.Try>
                     <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="KillProcess" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="[process.ProcessName]" />
                   </TryCatch.Try>
                   <TryCatch.Catches>
-                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,104" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
@@ -209,7 +197,7 @@
         </If.Else>
       </If>
     </Sequence>
-    <Sequence DisplayName="Finalize" sap:VirtualizedContainerService.HintSize="819,283" sap2010:WorkflowViewState.IdRef="Sequence_10">
+    <Sequence DisplayName="Finalize" sap:VirtualizedContainerService.HintSize="823,283" sap2010:WorkflowViewState.IdRef="Sequence_10">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
